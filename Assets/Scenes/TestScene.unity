@@ -463,6 +463,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  jumpForce: 5
+  gravityScale: 2
   charCon: {fileID: 1099061196}
 --- !u!1 &1349563202 stripped
 GameObject:
@@ -596,7 +598,7 @@ Transform:
   m_GameObject: {fileID: 1565144449}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.9300045, w: 0.36754823}
-  m_LocalPosition: {x: -0.00000026023162, y: -1.76, z: 4.8}
+  m_LocalPosition: {x: -0.00000026023162, y: -1.76, z: 6.72}
   m_LocalScale: {x: 6.6644998, y: 6.6644998, z: 6.6644998}
   m_ConstrainProportionsScale: 1
   m_Children: []
