@@ -16,6 +16,9 @@ public class PlayerController : MonoBehaviour
     private Vector3 moveAmount;
 
     public float rotateSpeed = 10f;
+
+    public Animator anim;
+    private float moveVel;
     // Start is called before the first frame update
     void Start()
     {
@@ -49,7 +52,9 @@ public class PlayerController : MonoBehaviour
         {
             if (moveAmount != Vector3.zero)
             {
-                transform.rotation = Quaternion.LookRotation(moveAmount);
+                Quaternion newRot = Quaternion.LookRotation(moveAmount);
+
+                transform.rotation = Quaternion.Slerp(transform.rotation, newRot, rotateSpeed * Time.deltaTime); 
             }
         }
 
@@ -65,5 +70,10 @@ public class PlayerController : MonoBehaviour
 
         charCon.Move(new Vector3(moveAmount.x * moveSpeed, moveAmount.y * moveSpeed, moveAmount.z * moveSpeed) * Time.deltaTime);
 
+        moveVel = new Vector3(moveAmount.x, 0f, moveAmount.z).magnitude * moveSpeed;
+        anim.SetFloat("speed", moveVel);
+
+        anim.SetBool("isGrounded", charCon.isGrounded);
+        anim.SetFloat("yVel", moveAmount.y);
     }
 }
