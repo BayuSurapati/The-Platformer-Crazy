@@ -26,6 +26,7 @@ public class CameraController : MonoBehaviour
         if (transform.position.y < offset.y)
         {
             transform.position = new Vector3(transform.position.x, offset.y, transform.position.z);
+     
         }
     }
 }
