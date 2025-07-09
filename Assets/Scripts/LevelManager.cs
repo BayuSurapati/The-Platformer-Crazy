@@ -10,7 +10,7 @@ public class LevelManager : MonoBehaviour
     public bool respawning;
 
     private PlayerController player;
-
+    public Vector3 respawnPoint;
     void Awake()
     {
         instance = this;
@@ -20,6 +20,7 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         player = FindObjectOfType<PlayerController>();
+        respawnPoint = player.transform.position + Vector3.up;
     }
 
     // Update is called once per frame
@@ -39,6 +40,12 @@ public class LevelManager : MonoBehaviour
 
     public IEnumerator RespawnCo()
     {
+        player.gameObject.SetActive(false);
         yield return new WaitForSecondsRealtime(waitBeforeRespawn);
+        player.transform.position = respawnPoint;
+
+        player.gameObject.SetActive(true);
+
+        respawning = false;
     }
 }
