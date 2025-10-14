@@ -29,4 +29,9 @@ public class CameraController : MonoBehaviour
      
         }
     }
+
+    public void SnapToTarget()
+    {
+        transform.position = target.position + offset;
+    }
 }

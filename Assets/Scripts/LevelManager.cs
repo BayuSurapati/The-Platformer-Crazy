@@ -10,7 +10,11 @@ public class LevelManager : MonoBehaviour
     public bool respawning;
 
     private PlayerController player;
+
+    [HideInInspector]
     public Vector3 respawnPoint;
+
+    private CameraController cam;
     void Awake()
     {
         instance = this;
@@ -21,6 +25,8 @@ public class LevelManager : MonoBehaviour
     {
         player = FindObjectOfType<PlayerController>();
         respawnPoint = player.transform.position + Vector3.up;
+
+        cam = FindObjectOfType<CameraController>(); 
     }
 
     // Update is called once per frame
@@ -35,6 +41,7 @@ public class LevelManager : MonoBehaviour
         {
             respawning = true;
             StartCoroutine(RespawnCo());
+            UIController.instance.FadeToBlack();
         }
     }
 
@@ -44,8 +51,12 @@ public class LevelManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(waitBeforeRespawn);
         player.transform.position = respawnPoint;
 
+        cam.SnapToTarget();
+
         player.gameObject.SetActive(true);
 
         respawning = false;
+
+        UIController.instance.FadeFromBlack();
     }
 }
