@@ -42,6 +42,8 @@ public class LevelManager : MonoBehaviour
             respawning = true;
             StartCoroutine(RespawnCo());
             UIController.instance.FadeToBlack();
+
+            PlayerHealthController.instance.FillHealth();
         }
     }
 
